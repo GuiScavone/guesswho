@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess Who Game</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Guess Who Game</h1>
+  <p>Welcome to Guess Who! Choose an option from the menu:</p>
+  <button id="startComputerButton">Play against Computer</button>
+  <button id="howToPlayButton">How to Play</button>
+  <button id="viewScoreButton">View Scoreboard</button>
+
+  <div id="gameContainer" style="display: none;">
+    <h2>Game Setup</h2>
+    <button id="startGameButton">Play</button>
+    <div id="questions" style="display: none;">
+      <h2>Choose a Question</h2>
+      <select id="questionSelect">
+        <option value="hasBrownHair">Does the character have brown hair?</option>
+        <option value="hasGlasses">Does the character wear glasses?</option>
+        <option value="hasBrownEyes">Does the character have brown eyes?</option>
+        <option value="hasBeard">Does the character have a beard?</option>
+        <option value="isMale">Is the character male?</option>
+      </select>
+      <button id="askQuestionButton">Ask Question</button>
+      <p id="computerResponse"></p>
+    </div>
+    <div id="guessSection" style="display: none;">
+      <h2>Guess the Secret Character</h2>
+      <select id="characterSelect">
+        <option value="Tatiana">Tatiana</option>
+        <option value="Alda">Alda</option>
+        <option value="Ricardo">Ricardo</option>
+        <option value="Marco">Marco</option>
+        <option value="Cesar">César</option>
+      </select>
+      <button id="guessButton">Guess</button>
+      <p id="result"></p>
+    </div>
+  </div>
+
+  <script>
+    const characters = [
+      { name: 'Tatiana', isMale: false, hasGlasses: false, hasBrownHair: false, hasBeard: false, hasBrownEyes: true },
+      { name: 'Alda', isMale: false, hasGlasses: false, hasBrownHair: true, hasBeard: false, hasBrownEyes: true },
+      { name: 'Ricardo', isMale: true, hasGlasses: true, hasBrownHair: true, hasBeard: true, hasBrownEyes: false },
+      { name: 'Marco', isMale: true, hasGlasses: true, hasBrownHair: true, hasBeard: true, hasBrownEyes: true },
+      { name: 'Cesar', isMale: true, hasGlasses: false, hasBrownHair: true, hasBeard: true, hasBrownEyes: true }
+    ];
+
+    let secretCharacter;
+    let playerScore = 0;
+    let questionCount = 0;
+
+    const startComputerButton = document.getElementById('startComputerButton');
+    const startGameButton = document.getElementById('startGameButton');
+    const howToPlayButton = document.getElementById('howToPlayButton');
+    const viewScoreButton = document.getElementById('viewScoreButton');
+    const gameContainer = document.getElementById('gameContainer');
+    const questions = document.getElementById('questions');
+    const questionSelect = document.getElementById('questionSelect');
+    const askQuestionButton = document.getElementById('askQuestionButton');
+    const computerResponse = document.getElementById('computerResponse');
+    const guessSection = document.getElementById('guessSection');
+    const characterSelect = document.getElementById('characterSelect');
+    const guessButton = document.getElementById('guessButton');
+    const result = document.getElementById('result');
+
+    startComputerButton.addEventListener('click', () => {
+      startGame();
+    });
+
+    startGameButton.addEventListener('click', () => {
+      startGame();
+    });
+
+    howToPlayButton.addEventListener('click', () => {
+      alert('How to Play: Ask three yes/no questions about the secret character. Then, guess the secret character from the choices.');
+    });
+
+    viewScoreButton.addEventListener('click', () => {
+      alert(`Player Score: ${playerScore}`);
+    });
+
+    askQuestionButton.addEventListener('click', () => {
+  const selectedQuestion = questionSelect.value;
+  const characterProperty = secretCharacter[selectedQuestion];
+  const randomResponse = characterProperty ? 'yes' : 'no';
+
+  computerResponse.textContent = `Computer's response: ${randomResponse}`;
+  questionCount++;
+
+  if (questionCount === 4) {
+    questions.style.display = 'none';
+    askQuestionButton.textContent = 'Guess Character';
+    setTimeout(() => {
+      guessSection.style.display = 'block';
+    }, 1000);
+  }
+});
+
+    guessButton.addEventListener('click', () => {
+      const guessedCharacter = characterSelect.value;
+      if (guessedCharacter === secretCharacter.name) {
+        alert('Correct! You guessed right!');
+        playerScore++;
+      } else {
+        alert('Sorry, that\'s not the secret character.');
+      }
+      secretCharacter = characters[Math.floor(Math.random() * characters.length)];
+      questionCount = 0;
+      questions.style.display = 'block';
+      guessSection.style.display = 'none';
+      computerResponse.textContent = '';
+    });
+
+    function startGame() {
+      gameContainer.style.display = 'block';
+      questions.style.display = 'none';
+      guessSection.style.display = 'none';
+      result.textContent = '';
+      questionCount = 0;
+
+      setTimeout(() => {
+        computerAnswerQuestion();
+      }, 1500); 
+    }
+
+    function computerAnswerQuestion() {
+      secretCharacter = characters[Math.floor(Math.random() * characters.length)];
+      questions.style.display = 'block';
+      questionSelect.selectedIndex = 0;
+      computerResponse.textContent = '';
+    }
+  </script>
+</body>
+</html>
