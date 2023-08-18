@@ -1,2 +1,2 @@
 # guesswho 
-Guess Who game with CLI 
+Guess Who game with CLI & GUI
