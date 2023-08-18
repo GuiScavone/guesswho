@@ -1,17 +1,26 @@
 const readline = require('readline');
-const { GameBoard } = require('./game-board');
+const Gameboard = require('./js/game-board');
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-class Menu {
+
+
+
+
+
+
+
+
+
+/*class Menu {
     constructor(){
-        this.game = new GameBoard(); //inicializando a class game board
+        //this.game = new Gameboard(); //inicializando a class game board
     }
 
-    startGame() {
+    menuGame() {
         console.log('#####################')
         console.log('\nWelcome to Guess Who Game!');
         console.log('1. Set Players Name');
@@ -23,13 +32,13 @@ class Menu {
         rl.question('Choose an option: ', (option) => {
           switch (option) {
             case '1':
-              //this.setPlayersNames(); exemplo de nome de função para definir os nomes dos jogadores 
+              //this.setPlayerNames(); //exemplo de nome de função para definir os nomes dos jogadores 
               break;
             case '2':
-                //this.setPlayerVsPlayer(); exemplo de nome de função para definir jogador vs jogador
+               //this.startPlayerVsPlayer(); //exemplo de nome de função para definir jogador vs jogador
                break;
             case '3':
-                //this.setPlayersVsComputer(); exemplo de nome de função para definir jogador vs computador
+             // this.startPlayersVsComputer(); //exemplo de nome de função para definir jogador vs computador
                break;
             case '4':
               console.log('Thanks for playing. See you soon.');
@@ -39,12 +48,16 @@ class Menu {
             default:
               console.log('Not a valid option, please try again.');
               console.log("\n");
-              this.startGame();
+              this.menuGame();
               break;
           }
         });
       }
-}
+
+    }
 
 const menu = new Menu();
-menu.startGame();
+menu.menuGame();*/
+
+
+

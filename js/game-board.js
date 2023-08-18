@@ -1,4 +1,10 @@
 const { Character } = require("./character");
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 // List of possible features each character can have. We're assuming 6 characters per game, therefore 6 names.
 const eyeColors = ["blue", "green", "brown", "hazel"];
@@ -77,7 +83,59 @@ class GameBoard {
     );
 
     //console.log("After filtering", this.remainingCharacters);
-  }
+    }
 }
+
+function askQuestion(question, callback) {
+  rl.question(question, (answer) => {
+    callback(answer.trim().toLowerCase());
+  });
+}
+
+function playGame() {
+  const secretCharacter = this.Character;
+
+  console.log('Welcome to Guess Who!');
+  console.log('Try to guess the secret character.');
+
+  askQuestion('Do you want to play player vs player (pvp) or player vs computer (pvc)? ', (mode) => {
+    if (mode === 'pvp') {
+      console.log("Sorry, player vs player mode is not implemented in this example.");
+      rl.close();
+    } else if (mode === 'pvc') {
+      console.log('Available attributes: ' + hairColors + eyeColors + beard + glasses);
+      playVsComputer(secretCharacter);
+    } else {
+      console.log('Invalid mode. Please choose pvp or pvc.');
+      playGame();
+    }
+  });
+}
+
+function playVsComputer(secretCharacter) {
+  function makeGuess() {
+    askQuestion('Enter an attribute to guess: ', (attribute) => {
+      if (attribute === eyeColors || attribute === hairColors || attribute === beard || attribute === glasses) {
+        askQuestion('Enter the value for the attribute: ', (matchesChosenCharacter) => {
+          if (secretCharacter[attribute] === matchesChosenCharacter) {
+            console.log(`Congratulations! You guessed correctly. The secret character is ${secretCharacter.name}.`);
+            rl.close();
+          } else {
+            console.log('Incorrect guess. Try again.');
+            makeGuess();
+          }
+        });
+      } else {
+        console.log('Invalid attribute.');
+        makeGuess();
+      }
+    });
+  }
+
+  makeGuess();
+}
+
+playGame();
+
 
 module.exports = { GameBoard };
