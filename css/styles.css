@@ -18,7 +18,7 @@ body {
   
 h1, h2 {
     color: #fff;
-    margin-left: 2rem;
+    margin-left: 2.5rem;
   }
 
 
@@ -107,5 +107,5 @@ h1, h2 {
 }
 
 #startGameButton {
-  margin-left: 3rem;
+  margin-left: 3.5rem;
 }
