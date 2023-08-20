@@ -27,6 +27,10 @@ class Character {
         return false;
     }
   }
+
+  toString() {
+    return `Name: ${this.name}; Hair color: ${this.hairColor}; Eye color: ${this.eyeColor}; Beard: ${this.hasBeard}; Glasses: ${this.hasGlasses}`;
+  }
 }
 
 module.exports = { Character };

@@ -1,18 +1,32 @@
 const { Character } = require("./character");
 
-// List of possible features each character can have. We're assuming 6 characters per game, therefore 6 names.
+const numberOfCharacters = 10;
+
+// List of possible features each character can have. We're assuming 10 characters per game, therefore 10 names.
 const eyeColors = ["blue", "green", "brown", "hazel"];
 const hairColors = ["blond", "brown", "black", "grey"];
-const names = ["Tony", "Matt", "Florence", "Margot", "Stacy", "Peter"];
+const names = [
+  "Tony",
+  "Matt",
+  "Florence",
+  "Margot",
+  "Stacy",
+  "Peter",
+  "Megan",
+  "Sandra",
+  "Dwayne",
+  "Murphy",
+];
 const beard = [true, false];
 const glasses = [true, false];
 
 class GameBoard {
+  numberOfPlays = 3;
   chosenCharacter = null;
   remainingCharacters = [];
 
   constructor() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < numberOfCharacters; i++) {
       let isRepeatedCharacter = false;
 
       do {
@@ -46,7 +60,7 @@ class GameBoard {
       } while (isRepeatedCharacter);
     }
 
-    // Choose a character amongst the 6 characters.
+    // Choose a character amongst the generated ones.
     this.chosenCharacter =
       this.remainingCharacters[
         this.generateRandomInt(0, this.remainingCharacters.length - 1)
@@ -60,13 +74,12 @@ class GameBoard {
 
   // Uses the matchesFeature() method in character.js to compare if it's equal to chosenCharacter's features.
   filterCharacters(featureName, featureValue) {
+    this.numberOfPlays--;
+
     const matchesChosenCharacter = this.chosenCharacter.matchesFeature(
       featureName,
       featureValue
     );
-
-    //console.log("This is the chosen character", this.chosenCharacter);
-    //console.log("Before filtering", this.remainingCharacters);
 
     // If user's question is === with the character's feature, we'll filter all remaining characters by those who have that feature.
     // If user's question is !== to the characters feature, we'll filter all remaining characters by those who don't have that feature.
@@ -75,9 +88,7 @@ class GameBoard {
         ? character.matchesFeature(featureName, featureValue)
         : !character.matchesFeature(featureName, featureValue)
     );
-
-    //console.log("After filtering", this.remainingCharacters);
   }
 }
 
-module.exports = { GameBoard };
+module.exports = { GameBoard, eyeColors, hairColors };
