@@ -173,16 +173,16 @@ class Menu {
   }
 
   guessWho() {
-    console.log("These are the remaining characters:");
-    this.gameBoard.remainingCharacters.forEach((character, characterIndex) => {
-      console.log(`${characterIndex} - ${character.toString()}`);
+    console.log("These are the remaining characters:\n");
+    this.gameBoard.remainingCharacters.forEach((character) => {
+      console.log(`${character.toString()}\n`);
     });
 
-    rl.question("My guess is: ", (chosenOption) => {
-      const chosenCharacter =
-        this.gameBoard.remainingCharacters[parseInt(chosenOption)];
-
-      if (this.gameBoard.chosenCharacter.name === chosenCharacter.name) {
+    rl.question("Write the characters name: ", (chosenName) => {
+      if (
+        this.gameBoard.chosenCharacter.name.toLowerCase() ===
+        chosenName.toLowerCase()
+      ) {
         console.log("You have guessed correctly!");
       } else {
         console.log(
