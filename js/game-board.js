@@ -91,4 +91,4 @@ class GameBoard {
   }
 }
 
-module.exports = { GameBoard, eyeColors, hairColors };
+module.exports = { GameBoard, eyeColors, hairColors, names, beard, glasses };
