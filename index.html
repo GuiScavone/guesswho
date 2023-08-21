@@ -47,11 +47,13 @@
       { name: 'Marco', isMale: true, hasGlasses: true, hasBrownHair: true, hasBeard: true, hasBrownEyes: true },
       { name: 'Cesar', isMale: true, hasGlasses: false, hasBrownHair: true, hasBeard: true, hasBrownEyes: true }
     ];
-
+    
+    // Keep track of game state
     let secretCharacter;
     let playerScore = 0;
     let questionCount = 0;
 
+    // DOM elements
     const startComputerButton = document.getElementById('startComputerButton');
     const startGameButton = document.getElementById('startGameButton');
     const howToPlayButton = document.getElementById('howToPlayButton');
@@ -66,6 +68,7 @@
     const guessButton = document.getElementById('guessButton');
     const result = document.getElementById('result');
 
+    // Event listeners
     startComputerButton.addEventListener('click', () => {
       startGame();
     });
@@ -81,16 +84,19 @@
     viewScoreButton.addEventListener('click', () => {
       alert(`Player Score: ${playerScore}`);
     });
-
+    
+    // Get selected question and check its property in the secret character
     askQuestionButton.addEventListener('click', () => {
   const selectedQuestion = questionSelect.value;
   const characterProperty = secretCharacter[selectedQuestion];
   const randomResponse = characterProperty ? 'yes' : 'no';
-
+  
+  // Display computer's response and increment question count
   computerResponse.textContent = `Computer's response: ${randomResponse}`;
   questionCount++;
 
   if (questionCount === 4) {
+    // Hide question section, change button text, and show guess section after delay
     questions.style.display = 'none';
     askQuestionButton.textContent = 'Ask Question';
     setTimeout(() => {
@@ -98,15 +104,18 @@
     }, 1000);
   }
 });
-
+    
     guessButton.addEventListener('click', () => {
+      // Get guessed character from select element
       const guessedCharacter = characterSelect.value;
+      // Check if guessed character matches the secret character's name
       if (guessedCharacter === secretCharacter.name) {
         alert('Correct! You guessed right!');
         playerScore++;
       } else {
         alert('Sorry, that\'s not the secret character.');
       }
+      // Generate a new secret character, reset question count, and display relevant sections
       secretCharacter = characters[Math.floor(Math.random() * characters.length)];
       questionCount = 0;
       questions.style.display = 'block';
@@ -120,13 +129,14 @@
       guessSection.style.display = 'none';
       result.textContent = '';
       questionCount = 0;
-
+       // Simulate computer response time and prepare to answer questions
       setTimeout(() => {
         computerAnswerQuestion();
       }, 1500); 
     }
-
+    
     function computerAnswerQuestion() {
+       // Randomly select a secret character and reset elements for next question
       secretCharacter = characters[Math.floor(Math.random() * characters.length)];
       questions.style.display = 'block';
       questionSelect.selectedIndex = 0;
