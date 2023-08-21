@@ -1,9 +1,9 @@
-![Guess Who](./img/Guess\Who\Cover.png)
+![Guess Who](./img/guess-who-cover.png)
 
-# guesswho 
+# Guess Who 
 Guess Who game with CLI & GUI
 
-_Welcome to our Guess Who game!_
+_Welcome to our Guess Who game!_  
 The main goal of the game is to guess the randomly chosen character in 3 tries, given a set of features you can choose from. The possibilities are endless. 
 You'll be able to use the menu with CLI.
 
