@@ -8,6 +8,8 @@ const rl = readline.createInterface({
 
 class Menu {
   gameBoard;
+  numberOfWins = 0;
+  numberOfDefeats = 0;
 
   displayInitialMenu() {
     console.log("#####################");
@@ -184,13 +186,41 @@ class Menu {
         chosenName.toLowerCase()
       ) {
         console.log("You have guessed correctly!");
+        this.numberOfWins++;
       } else {
         console.log(
           `Wrong guess, the character was ${this.gameBoard.chosenCharacter.name}.`
         );
+        this.numberOfDefeats++;
       }
 
-      this.exitGame();
+      this.displayAfterGameMenu();
+    });
+  }
+
+  displayAfterGameMenu() {
+    console.log("0. Play again");
+    console.log("1. Scoreboard");
+    console.log("2. Exit Game");
+
+    rl.question("Chosen option: ", (chosenOption) => {
+      switch (chosenOption) {
+        case "0":
+          this.displayInitialMenu();
+          break;
+        case "1":
+          console.log(
+            `Number of victories: ${this.numberOfWins}; Number of defeats: ${this.numberOfDefeats}`
+          );
+          this.displayAfterGameMenu();
+          break;
+        case "2":
+          this.exitGame();
+          break;
+        default:
+          console.log("You chose an invalid option, please try again.");
+          this.displayAfterGameMenu();
+      }
     });
   }
 
