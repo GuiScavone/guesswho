@@ -1,0 +1,69 @@
+class Character {
+  name;
+  eyeColor;
+  hairColor;
+  hasBeard;
+  hasGlasses;
+
+Porque criaram estas acima, pois já tem a baixo;
+
+constructor(name, eyeColor, hairColor, hasBeard, hasGlasses) {
+    this.name = name;
+    this.eyeColor = eyeColor;
+    this.hairColor = hairColor;
+    this.hasBeard = hasBeard;
+    this.hasGlasses = hasGlasses;
+  }
+
+
+
+
+=====================
+
+class GameBoard {
+  numberOfPlays = 3;
+  chosenCharacter = null;
+  remainingCharacters = [];
+
+Colocar como constructor; 
+
+=====================
+
+E todas as funções abaixo fora da Class GameBoard
+
+=====================
+
+Criar um file com estas informações.
+Para melhor leitura do código.
+
+const eyeColors = ["blue", "green", "brown", "hazel"];
+const hairColors = ["blond", "brown", "black", "grey"];
+const names = [
+  "Tony",
+  "Matt",
+  "Florence",
+  "Margot",
+  "Stacy",
+  "Peter",
+  "Megan",
+  "Sandra",
+  "Dwayne",
+  "Murphy",
+];
+const beard = [true, false];
+const glasses = [true, false];
+
+===================
+
+MAIN MENU.JS
+
+Class Menu não tem constructor
+
+===================
+
+Main Manu.js 
+Chataacter.js 
+
+Colocar mais comentários para melhor compreensão do código 
+
+
